@@ -34,3 +34,7 @@ A repository that uses `@psychodracon/*` npm packages commits an `.npmrc` that m
 The app needs a host rule in the Mend portal (Settings -> Credentials) with a classic personal access
 token that has `read:packages`, for both `npm.pkg.github.com` and `ghcr.io`. Without it, lookups of the
 private `@psychodracon/*` packages and images fail and show up on the Dependency Dashboard.
+
+## License
+
+Copyright (C) Kamil Ganczarek. Licensed under the GNU General Public License, version 3 or (at your option) any later version. See [LICENSE](LICENSE).
