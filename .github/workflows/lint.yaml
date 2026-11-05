@@ -1,0 +1,37 @@
+name: Lint
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - default.json
+      - renovate.json
+      - .github/workflows/lint.yaml
+  pull_request:
+    paths:
+      - default.json
+      - renovate.json
+      - .github/workflows/lint.yaml
+
+permissions:
+  contents: read
+
+jobs:
+  renovate:
+    name: Renovate config
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup / Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Lint / Validate configs
+        run: npx --yes --package renovate -- renovate-config-validator --strict --no-global default.json renovate.json
+
+      - name: Notify
+        if: failure() && github.ref == 'refs/heads/main'
+        uses: psychodracon/github-workflows/.github/actions/notify@v1
+        with:
+          status: ${{ job.status }}
+          token: ${{ secrets.PUSHOVER_API_TOKEN }}
+          user: ${{ secrets.PUSHOVER_USER_KEY }}
+          devices: ${{ secrets.PUSHOVER_DEVICES }}

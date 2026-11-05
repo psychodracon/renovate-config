@@ -1,0 +1,106 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "Shared Renovate policy for psychodracon repositories.",
+  "extends": [
+    "config:recommended",
+    "customManagers:dockerfileVersions",
+    "customManagers:githubActionsVersions"
+  ],
+  "dependencyDashboard": true,
+  "semanticCommits": "enabled",
+  "prConcurrentLimit": 0,
+  "prHourlyLimit": 0,
+  "timezone": "Europe/Warsaw",
+  "schedule": ["* 7-10 * * 0"],
+  "osvVulnerabilityAlerts": true,
+  "platformAutomerge": false,
+  "automergeStrategy": "merge-commit",
+  "packageRules": [
+    {
+      "description": "Wait 3 days after a release, except for vulnerability fixes.",
+      "matchJsonata": ["$not($exists(vulnerabilityFixVersion))"],
+      "minimumReleaseAge": "3 days"
+    },
+    {
+      "description": "Do not wait for releases of our own packages and actions.",
+      "matchPackageNames": ["@psychodracon/**", "psychodracon/**"],
+      "minimumReleaseAge": null
+    },
+    {
+      "description": "Pin Dockerfile base images to a digest.",
+      "matchManagers": ["dockerfile"],
+      "pinDigests": true
+    },
+    {
+      "description": "Merge Docker digest updates, which carry upstream security patches.",
+      "matchManagers": ["dockerfile", "docker-compose"],
+      "matchUpdateTypes": ["digest", "pin"],
+      "groupName": "Docker digests",
+      "automerge": true
+    },
+    {
+      "description": "Review Docker minor and patch updates.",
+      "matchManagers": ["dockerfile", "docker-compose"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "Docker images"
+    },
+    {
+      "description": "Merge GitHub Actions updates other than major.",
+      "matchManagers": ["github-actions"],
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "groupName": "GitHub Actions",
+      "automerge": true
+    },
+    {
+      "description": "Merge npm patch updates.",
+      "matchManagers": ["npm"],
+      "matchUpdateTypes": ["patch", "pin"],
+      "groupName": "npm patch dependencies",
+      "automerge": true
+    },
+    {
+      "description": "Review npm minor updates.",
+      "matchManagers": ["npm"],
+      "matchUpdateTypes": ["minor"],
+      "groupName": "npm minor dependencies"
+    },
+    {
+      "description": "Merge npm dev dependency minor updates.",
+      "matchManagers": ["npm"],
+      "matchDepTypes": ["devDependencies"],
+      "matchUpdateTypes": ["minor"],
+      "groupName": "npm dev minor dependencies",
+      "automerge": true
+    },
+    {
+      "description": "Merge NuGet patch updates.",
+      "matchManagers": ["nuget"],
+      "matchUpdateTypes": ["patch", "pin"],
+      "groupName": "NuGet patch dependencies",
+      "automerge": true
+    },
+    {
+      "description": "Review NuGet minor updates.",
+      "matchManagers": ["nuget"],
+      "matchUpdateTypes": ["minor"],
+      "groupName": "NuGet minor dependencies"
+    },
+    {
+      "description": "Keep the Playwright image and the npm package on the same version.",
+      "matchPackageNames": [
+        "mcr.microsoft.com/playwright",
+        "playwright",
+        "playwright-core",
+        "@playwright/test"
+      ],
+      "groupName": "Playwright",
+      "automerge": false
+    },
+    {
+      "description": "Keep the Velopack runtime and the vpk tool on the same version.",
+      "matchDepNames": ["Velopack", "vpk"],
+      "groupName": "Velopack",
+      "automerge": false
+    }
+  ]
+}
