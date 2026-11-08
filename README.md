@@ -20,11 +20,14 @@ wait. Vulnerability fixes ignore both and are opened at any time. Commits are co
 | npm patch and pin | grouped, automerged |
 | npm dev dependency minor | grouped, automerged |
 | NuGet patch and pin | grouped, automerged |
-| Docker minor and patch | grouped as `Docker images`, reviewed |
-| npm and NuGet minor | grouped per ecosystem, reviewed |
-| Major updates | one PR each, reviewed |
-| `Velopack` and `vpk` | always one reviewed group |
-| Playwright image and npm package | always one reviewed group |
+| Docker minor and patch | grouped as `Docker images`, manual merge |
+| npm and NuGet minor | grouped per ecosystem, manual merge |
+| Major updates | one PR each, manual merge |
+| `Velopack` and `vpk` | always one group, manual merge |
+| Playwright image and npm package | always one group, manual merge |
+
+PRs that need a manual merge are assigned to `psychodracon`, so they show up in notifications;
+automerged ones are not.
 
 A repository that uses `@psychodracon/*` npm packages commits an `.npmrc` that maps the scope to
 `https://npm.pkg.github.com`; Renovate reads it for lookups.
