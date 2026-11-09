@@ -13,6 +13,10 @@ Routine updates are opened on Sundays between 07:00 and 10:00 (Europe/Warsaw) af
 wait. Vulnerability fixes ignore both and are opened at any time. Commits are conventional
 (`chore(deps): ...`) and automerges use merge commits once CI passes.
 
+Third-party GitHub Actions are pinned to a commit SHA with the version as a comment
+(`uses: owner/action@<sha> # v1.2.3`), because a tag can be moved to other code without a new release.
+Our own `psychodracon/*` actions and workflows stay on their moving `@v1` tag.
+
 | Update | Handling |
 | --- | --- |
 | Docker digest and pin | grouped as `Docker digests`, automerged |

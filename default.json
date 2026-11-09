@@ -4,7 +4,8 @@
   "extends": [
     "config:recommended",
     "customManagers:dockerfileVersions",
-    "customManagers:githubActionsVersions"
+    "customManagers:githubActionsVersions",
+    "helpers:pinGitHubActionDigests"
   ],
   "dependencyDashboard": true,
   "assignees": ["psychodracon"],
@@ -51,6 +52,12 @@
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
       "groupName": "GitHub Actions",
       "automerge": true
+    },
+    {
+      "description": "Keep our own actions and workflows on their moving major tag (@v1) instead of a digest.",
+      "matchManagers": ["github-actions"],
+      "matchPackageNames": ["psychodracon/**"],
+      "pinDigests": false
     },
     {
       "description": "Merge npm patch updates.",
