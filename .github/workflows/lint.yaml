@@ -16,10 +16,15 @@ on:
 permissions:
     contents: read
 
+concurrency:
+    group: lint-${{ github.ref }}
+    cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
     renovate:
         name: Renovate config
         runs-on: ubuntu-latest
+        timeout-minutes: 30
         steps:
             - name: Setup / Checkout repository
               uses: actions/checkout@v7
