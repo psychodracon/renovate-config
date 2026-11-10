@@ -1,10 +1,26 @@
 # renovate-config
 
-Shared Renovate preset for all repositories. The policy and the app credentials are described in
-[README.md](README.md).
+Shared Renovate preset that every repository in the workspace extends (`local>psychodracon/renovate-config`),
+run by the hosted Mend Renovate app; no workflow runs Renovate. The policy and the app credentials are
+described in [README.md](README.md).
 
-- `default.json` is the preset and every repository extends it, so a change affects all of them. Validate
-  with `npx --yes --package renovate -- renovate-config-validator --strict --no-global default.json renovate.json`.
-- Later `packageRules` override earlier ones: general rules first, then Docker, GitHub Actions, npm and
-  NuGet, and the special groups (Playwright, Velopack) last.
-- Renovate runs as the Mend app, so there is no workflow to run it; this repository only has a lint workflow.
+## Commands
+
+```sh
+npx --yes --package renovate -- renovate-config-validator --strict --no-global default.json renovate.json
+```
+
+CI runs the same validation.
+
+## Conventions
+
+- There are no releases: `default.json` on `main` applies to every repository on its next Renovate run.
+- Later `packageRules` override earlier ones. Order: general rules, then Docker, GitHub Actions, npm,
+  NuGet, and the version-sync groups (Playwright, Velopack) last.
+- Every rule has a `description` that states the policy in one sentence.
+
+## Boundaries
+
+- **Ask first:** loosening auto-merge rules or the 3-day release age; anything that changes behaviour for
+  all repositories at once.
+- **Never:** split the Playwright or Velopack groups; their versions must update together.
