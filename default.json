@@ -7,7 +7,7 @@
     "customManagers:githubActionsVersions",
     "helpers:pinGitHubActionDigests"
   ],
-  "dependencyDashboard": true,
+  "dependencyDashboard": { "enabled": true },
   "assignees": ["psychodracon"],
   "semanticCommits": "enabled",
   "prConcurrentLimit": 0,
