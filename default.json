@@ -94,6 +94,14 @@
       "groupName": "NuGet minor dependencies"
     },
     {
+      "description": "Keep Node.js in Dockerfiles, .nvmrc and mise.toml on the same version.",
+      "matchManagers": ["dockerfile", "nvm", "mise"],
+      "matchDepNames": ["node"],
+      "matchUpdateTypes": ["major", "minor", "patch"],
+      "groupName": "Node.js",
+      "automerge": false
+    },
+    {
       "description": "Keep the Playwright image and the npm package on the same version.",
       "matchPackageNames": [
         "mcr.microsoft.com/playwright",
