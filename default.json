@@ -102,6 +102,13 @@
       "automerge": false
     },
     {
+      "description": "Move .NET to a new major in one pull request: SDK and runtime images and the global.json SDK.",
+      "matchPackageNames": ["mcr.microsoft.com/dotnet/**", "dotnet-sdk"],
+      "matchUpdateTypes": ["major"],
+      "groupName": ".NET",
+      "automerge": false
+    },
+    {
       "description": "Keep the Playwright image and the npm package on the same version.",
       "matchPackageNames": [
         "mcr.microsoft.com/playwright",

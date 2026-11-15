@@ -49,6 +49,7 @@ passes.
 | npm and NuGet minor | grouped per ecosystem, manual merge |
 | Major updates | one pull request each, manual merge |
 | Node.js in Dockerfiles, `.nvmrc` and `mise.toml` | always one group, manual merge (digests stay in `Docker digests`) |
+| .NET major (`mcr.microsoft.com/dotnet/*` images, `global.json` SDK) | one group, manual merge; `<TargetFramework>` still needs a hand edit |
 | `Velopack` and `vpk` | always one group, manual merge |
 | Playwright image and npm package | always one group, manual merge |
 
