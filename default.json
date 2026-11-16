@@ -7,7 +7,7 @@
     "customManagers:githubActionsVersions",
     "helpers:pinGitHubActionDigests"
   ],
-  "dependencyDashboard": true,
+  "dependencyDashboard": { "enabled": true },
   "assignees": ["psychodracon"],
   "semanticCommits": "enabled",
   "prConcurrentLimit": 0,
@@ -92,6 +92,21 @@
       "matchManagers": ["nuget"],
       "matchUpdateTypes": ["minor"],
       "groupName": "NuGet minor dependencies"
+    },
+    {
+      "description": "Keep Node.js in Dockerfiles, .nvmrc and mise.toml on the same version.",
+      "matchManagers": ["dockerfile", "nvm", "mise"],
+      "matchDepNames": ["node"],
+      "matchUpdateTypes": ["major", "minor", "patch"],
+      "groupName": "Node.js",
+      "automerge": false
+    },
+    {
+      "description": "Move .NET to a new major in one pull request: SDK and runtime images and the global.json SDK.",
+      "matchPackageNames": ["mcr.microsoft.com/dotnet/**", "dotnet-sdk"],
+      "matchUpdateTypes": ["major"],
+      "groupName": ".NET",
+      "automerge": false
     },
     {
       "description": "Keep the Playwright image and the npm package on the same version.",
